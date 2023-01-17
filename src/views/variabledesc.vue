@@ -30,27 +30,27 @@ export default {
           variables: [
             {
               title: "BPM",
-              titleOutput: "bpm",
+              titleAnalysis: "bpm",
               description: "Average beats per minute.",
             },
             {
               title: "Duration",
-              titleOutput: "duration_in_s",
+              titleAnalysis: "duration_in_s",
               description: "Total duration of the audio file in seconds - minimum 30 seconds as Whisper pads shorter audio files to that duration.",
             },
             {
               title: "Sample rate",
-              titleOutput: "sample_rate",
+              titleAnalysis: "sample_rate",
               description: "Sample rate of the analyzed audio file in Hz.",
             },
             {
               title: "Filesize",
-              titleOutput: "size_kB",
+              titleAnalysis: "size_kB",
               description: "File size in kilobytes.",
             },
             {
               title: "Speaker binary",
-              titleOutput: "speaker_detected",
+              titleAnalysis: "speaker_detected",
               description: "Flag whether or not a speaker has been detected.",
             },
           ],
@@ -60,37 +60,37 @@ export default {
           variables: [
             {
               title: "Language spoken",
-              titleOutput: "transcribed_OA_whisper_lang",
+              titleAnalysis: "transcribed_OA_whisper_lang",
               description: "Dominant language detected by Whisper.",
             },
             {
               title: "Length speech",
-              titleOutput: "total_speech",
+              titleAnalysis: "total_speech",
               description: "Number of seconds where speech was detected.",
             },
             {
               title: "Number voice breaks",
-              titleOutput: "voice_breaks",
+              titleAnalysis: "voice_breaks",
               description: "Number of pauses between speech segments.",
             },
             {
               title: "Max share speaker",
-              titleOutput: "max_speaker_share",
+              titleAnalysis: "max_speaker_share",
               description: "Largest share (%) an individual speaker has of the total speech duration - speech time speaker X / total_speech.",
             },
             {
               title: "Avg share speaker",
-              titleOutput: "avg_speaker_share",
+              titleAnalysis: "avg_speaker_share",
               description: "Average share (%) an individual speaker has of the total speech duration - speech time speaker X / total_speech / num_speakers.",
             },
             {
               title: "Sd share speaker",
-              titleOutput: "sd_speaker_share",
+              titleAnalysis: "sd_speaker_share",
               description: "Standard deviation of the shares (%) individual speakers have of the total speech duration - indicator how (un)balanced a conversation is (?).",
             },
             {
               title: "Emotion in audio",
-              titleOutput: "Emotion_audio",
+              titleAnalysis: "Emotion_audio",
               description: "'Disgust' score computed based on the audio file.",
             },
           ],
@@ -100,22 +100,22 @@ export default {
           variables: [
             {
               title: "Word count",
-              titleOutput: "word_count",
+              titleAnalysis: "word_count",
               description: "Length of the audio transcription in number of words.",
             },
             {
               title: "Sum of syllables",
-              titleOutput: "sum_syl",
+              titleAnalysis: "sum_syl",
               description: "Length of the audio transcription in number of syllables.",
             },
             {
               title: "Mean of syllables",
-              titleOutput: "mean_syl",
+              titleAnalysis: "mean_syl",
               description: "Mean number of syllables per word.",
             },
             {
               title: "Emotion text",
-              titleOutput: "emotion_text",
+              titleAnalysis: "emotion_text",
               description: "Emotion scores computed based on the English Whisper transcription.",
             },
           ],

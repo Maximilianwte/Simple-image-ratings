@@ -217,83 +217,99 @@
             structure: [{
                 index: 0,
                 title: "BPM",
+                titleAnalysis: "bpm",
                 active: true
               },
               {
                 index: 1,
                 title: "Duration",
+                titleAnalysis: "duration_in_s",
                 active: true
               },
               {
                 index: 2,
                 title: "Sample rate",
+                titleAnalysis: "sample_rate",
                 active: true
               },
               {
                 index: 3,
                 title: "Filesize",
+                titleAnalysis: "size_kB",
                 active: true
               },
               {
                 index: 4,
                 title: "Speaker binary",
+                titleAnalysis: "speaker_detected",
                 active: true
               },
             ],
             audio: [{
                 index: 0,
                 title: "Language spoken",
+                titleAnalysis: "transcribed_OA_whisper_lang",
                 active: false
               },
               {
                 index: 1,
                 title: "Length speech",
+                titleAnalysis: "total_speech",
                 active: false
               },
               {
                 index: 2,
                 title: "Number voice breaks",
+                titleAnalysis: "voice_breaks",
                 active: false
               },
               {
                 index: 3,
                 title: "Max share speaker",
+                titleAnalysis: "max_speaker_share",
                 active: false
               },
               {
                 index: 4,
                 title: "Avg share speaker",
+                titleAnalysis: "avg_speaker_share",
                 active: false
               },
               {
                 index: 5,
                 title: "Sd share speaker",
+                titleAnalysis: "sd_speaker_share",
                 active: false
               },
               {
                 index: 6,
                 title: "Emotion of audio",
+                titleAnalysis: "Emotion_audio",
                 active: false
               },
             ],
             transcription: [{
                 index: 0,
                 title: "Word count",
+                titleAnalysis: "word_count",
                 active: false
               },
               {
                 index: 1,
                 title: "Sum of syllables",
+                titleAnalysis: "sum_syl",
                 active: false
               },
               {
                 index: 2,
                 title: "Mean of syllables",
+                titleAnalysis: "mean_syl",
                 active: false
               },
               {
                 index: 3,
                 title: "Emotion of text",
+                titleAnalysis: "emotion_text",
                 active: false
               },
             ],
@@ -343,9 +359,9 @@
         if (this.sampleAudio.active) {
           this.ui.analyzing = true;
 
-          let response = await backend_functions.send_request({
-            'variables': null
-          });
+          var vars_filter = this.get_variables_filterout();
+
+          let response = await backend_functions.send_request(vars_filter);
           var data = response.data;
           this.data.results = data;
 
@@ -357,6 +373,18 @@
         else {
           this.ui.information = "Please upload an audio file.";
         }
+      },
+      get_variables_filterout() {
+        var data = [];
+        var var_levels = ['structure', 'audio', 'transcription']
+        for (var ind_var_level in var_levels) {
+          for (var ind_var = 0; ind_var < this.data.variableSelection[var_levels[ind_var_level]].length; ind_var++) {
+            if (!this.data.variableSelection[var_levels[ind_var_level]][ind_var].active) {
+              data.push(this.data.variableSelection[var_levels[ind_var_level]][ind_var].titleAnalysis);
+            }
+          }
+        }
+        return data;
       },
       whileAnalyzing_changeDisplayText() {
         switch (this.ui.whileAnalyzing_step) {
@@ -417,7 +445,7 @@
           }
         } else {
           for (
-            var i = 0; i < this.data.variableSelection[variableSection].length; i++
+            i = 0; i < this.data.variableSelection[variableSection].length; i++
           ) {
             this.ui.nCalculationVariablesSelected = this.data.variableSelection[
                 variableSection

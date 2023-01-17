@@ -14,18 +14,21 @@ router.get("/", (req, res) => {
 });
 
 router.post("/get_analysis", function (req, res) {
-  //var input = JSON.parse(req.body);
-  /* var dataArray = fs.readFileSync('functions/data/analysis.csv','utf8');
-  var analysisData = csvhandler.toObjects(dataArray);
-  res.status(200).send(analysisData);   */
+  var input = JSON.parse(req.body);
   axios
   .get("https://raw.githubusercontent.com/Maximilianwte/AAA-Front/master/functions/data/analysis.csv")
   .then(function (response) {
+    var analysisData = csvhandler.toObjects(response.data);
+    for (var i = 0; i < analysisData.length; i++) {
+      for (var ind in input) {
+        delete analysisData[i][input[ind]];
+      }
+    }
+    var outputData = csvhandler.fromObjects(analysisData);
     res.attachment('filename.csv');
-    res.status(200).send(JSON.stringify(response.data));
+    res.status(200).send(JSON.stringify(outputData));
   });  
 
-  //var data = fs.readFileSync('./functions/data/analysis.csv','utf8');
 });
 
 app.use("/.netlify/functions/data", router);
