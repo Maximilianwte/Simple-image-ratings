@@ -4,7 +4,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500&display=swap');
 
 body {
-  font-family: 'Work Sans', sans-serif;
+  font-family: sans-serif;
   overflow-x: hidden;
 }
 
@@ -34,9 +34,9 @@ a:hover {
 }
 
 .theme_light {
-  --main: #2d425d;
+  --main: #202020;
   --lighter: #a1a4a7;
-  --alternative: #28292a;
+  --alternative: #6e88a2;
   --bg: #fff;
   --focus: #535457;
 }
